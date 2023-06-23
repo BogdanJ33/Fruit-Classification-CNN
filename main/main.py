@@ -58,16 +58,17 @@ def predict_fruit(file, model):
     print("Predicting .................................")
     ar=convert_to_array(file)
     ar=ar/255
-    label=1
+
     a=[]
     a.append(ar)
     a=np.array(a)
     score=model.predict(a,verbose=1)
     label_index=np.argmax(score)
-    print(label_index)
+
     acc=np.max(score)
     fruit=get_fruit_name(label_index)
-    print(fruit)
+    print(str(label_index) + " - " + fruit)
+    file = file.split("\\")[1]
     print("The predicted Fruit from file" + file + " is a "+fruit+" with accuracy =    "+str(acc))
 
 def create_model(fruits, labels, num_classes):
