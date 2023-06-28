@@ -7,6 +7,7 @@ import cv2
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Dropout
 import keras
+from keras.optimizers import SGD, RMSprop
 from keras.utils import np_utils
 import matplotlib.pyplot as plt
 from keras.models import load_model
@@ -87,9 +88,14 @@ def create_model(fruits, labels, num_classes):
     model.add(MaxPooling2D(pool_size=2))
     model.add(Conv2D(filters=64, kernel_size=2, padding="same", activation="relu"))
     model.add(MaxPooling2D(pool_size=2))
+
     model.add(Dropout(0.2))
     model.add(Flatten())
     model.add(Dense(512, activation="relu"))
+
+    # model.add(Dropout(0.5))
+    # model.add(Dense(256, activation="relu"))
+    # model.add(Dropout(0.5))
     model.add(Dropout(0.2))
     model.add(Dense(num_classes, activation="softmax"))
     model.summary()
